@@ -1,8 +1,8 @@
 'use strict';
 
 var path = require('path');
-var gulp = require('gulp');
 var conf = require('./conf');
+var gulp = conf.gulp;
 
 var browserSync = require('browser-sync');
 
@@ -38,4 +38,5 @@ gulp.task('watch', ['markups', 'inject'], function () {
   gulp.watch(path.join(conf.paths.src, '/app/**/*.html'), function(event) {
     browserSync.reload(event.path);
   });
+
 });

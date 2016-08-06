@@ -1,8 +1,8 @@
 'use strict';
 
 var path = require('path');
-var gulp = require('gulp');
 var conf = require('./conf');
+var gulp = conf.gulp;
 
 var karma = require('karma');
 

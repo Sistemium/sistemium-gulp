@@ -7,16 +7,19 @@
  */
 
 var gutil = require('gulp-util');
+import defaults from '../defaults';
 
 /**
  *  The main paths of your project handle these with care
  */
 exports.paths = {
-  src: 'src',
-  dist: 'dist',
-  tmp: '.tmp',
-  e2e: 'e2e'
+  src: defaults.src || 'src',
+  dist: defaults.dist || 'dist',
+  tmp: defaults.tmp || '.tmp',
+  e2e: defaults.e2e || 'e2e'
 };
+
+exports.gulp = defaults.gulp;
 
 /**
  *  Wiredep is the lib which inject bower dependencies in your project
@@ -31,10 +34,10 @@ exports.wiredep = {
 /**
  *  Common implementation for an error handler of a Gulp plugin
  */
-exports.errorHandler = function(title) {
+exports.errorHandler = function (title) {
   'use strict';
 
-  return function(err) {
+  return function (err) {
     gutil.log(gutil.colors.red('[' + title + ']'), err.toString());
     this.emit('end');
   };
@@ -44,4 +47,4 @@ exports.plugins = require('gulp-load-plugins')({
   scope: ['dependencies', 'devDependencies', 'peerDependencies']
 });
 
-console.log (exports.plugins);
+console.info('required gulp/conf paths:', exports.paths);

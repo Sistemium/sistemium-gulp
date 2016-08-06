@@ -1,9 +1,9 @@
 'use strict';
 
 var path = require('path');
-var gulp = require('gulp');
-var conf = require('./conf');
 var runSequence = require ('run-sequence');
+var conf = require('./conf');
+var gulp = conf.gulp;
 
 var $ = conf.plugins;
 
@@ -117,3 +117,5 @@ gulp.task('build', function(callback) {
     callback
   );
 });
+
+console.info('required build');
