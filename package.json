@@ -7,6 +7,7 @@
     "compile": "babel src --out-dir lib",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "prepublish": "npm run compile",
+    "postinstall": "npm i --development",
     "test": "babel-node ./node_modules/.bin/isparta cover _mocha",
     "watch:compile": "watch 'npm run compile' src"
   },
@@ -24,7 +25,7 @@
     "url": "https://github.com/Sistemium/sistemium-gulp/issues"
   },
   "homepage": "https://github.com/Sistemium/sistemium-gulp#readme",
-  "dependencies": {
+  "devDependencies": {
     "browser-sync": "~2.9.11",
     "browser-sync-spa": "~1.0.3",
     "uglify-save-license": "~0.4.1",
