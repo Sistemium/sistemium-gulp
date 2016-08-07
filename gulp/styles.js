@@ -9,7 +9,6 @@ var browserSync = require('browser-sync');
 var $ = conf.plugins;
 
 var wiredep = require('wiredep').stream;
-var _ = require('lodash');
 
 gulp.task('styles-reload', ['styles'], function() {
   return buildStyles()
@@ -46,7 +45,7 @@ var buildStyles = function() {
     path.join(conf.paths.src, '/app/index.scss')
   ])
     .pipe($.inject(injectFiles, injectOptions))
-    .pipe(wiredep(_.extend({}, conf.wiredep)))
+    .pipe(wiredep(Object.assign({}, conf.wiredep)))
     .pipe($.rubySass(sassOptions)).on('error', conf.errorHandler('RubySass'))
     .pipe(cssFilter)
     .pipe($.sourcemaps.init({ loadMaps: true }))
