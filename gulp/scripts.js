@@ -29,7 +29,7 @@ function transpileScripts() {
   ])
     .pipe(plugins.sourcemaps.init())
     .pipe(plugins.babel())
-    .pipe(plugins.sourcemaps.write(), '.')
+    .pipe(plugins.sourcemaps.write('.'))
     .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve/app/')))
 
 }
