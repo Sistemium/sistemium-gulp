@@ -6,9 +6,10 @@ var fs = require('fs');
 
 exports.run = function (gulp, config) {
 
-  setDefaults(config, gulp);
+  config = setDefaults(config, gulp);
+  config.base = config.base || '.';
 
-  fs.readdirSync('./gulp').filter(function(file) {
+  fs.readdirSync(config.base + '/gulp').filter(function(file) {
     return (/\.(js|coffee)$/i).test(file);
   }).map(function(file) {
     require('./gulp/' + file);

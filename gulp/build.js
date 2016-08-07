@@ -117,5 +117,3 @@ gulp.task('build', function(callback) {
     callback
   );
 });
-
-console.info('required build');

@@ -47,4 +47,4 @@ exports.plugins = require('gulp-load-plugins')({
   scope: ['dependencies', 'devDependencies', 'peerDependencies']
 });
 
-console.info('required gulp/conf paths:', exports.paths);
+console.info('gulp use paths:', exports.paths);

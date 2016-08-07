@@ -7,8 +7,7 @@ export {setDefaults};
 
 function setDefaults(defaults, gulp) {
   Object.assign(storedDefaults, defaults || {});
+  console.info('set defaults:', storedDefaults);
   storedDefaults.gulp = gulp;
-  console.info('set defaults', storedDefaults);
+  return storedDefaults;
 }
-
-console.info('required defaults');
