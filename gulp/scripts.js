@@ -11,14 +11,14 @@ var $ = conf.plugins;
 
 
 gulp.task('scripts-reload', function() {
-  lintScripts();
-  return transpileScripts()
+  return lintScripts()
+    .pipe(transpileScripts())
     .pipe(browserSync.stream());
 });
 
 gulp.task('scripts', function() {
-  lintScripts();
-  return transpileScripts();
+  return lintScripts()
+    .pipe(transpileScripts());
 });
 
 function transpileScripts() {
@@ -38,5 +38,11 @@ function lintScripts() {
   return gulp.src(path.join(conf.paths.src, '/app/**/*.js'))
     .pipe($.eslint())
     .pipe($.eslint.format())
+    .pipe($.eslint.results(results => {
+      console.log(`Total Results: ${results.length}`);
+      console.log(`Total Warnings: ${results.warningCount}`);
+      console.log(`Total Errors: ${results.errorCount}`);
+    }))
+    .pipe($.eslint.failAfterError())
     .pipe($.size())
 }
