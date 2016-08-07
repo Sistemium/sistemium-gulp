@@ -2,7 +2,6 @@
 
 var path = require('path');
 var runSequence = require('run-sequence');
-import del from 'del';
 var conf = require('./conf');
 var gulp = conf.gulp;
 
@@ -98,7 +97,8 @@ gulp.task('other', function () {
 });
 
 gulp.task('clean', function () {
-  return del([path.join(conf.paths.dist, '/'), path.join(conf.paths.tmp, '/')]);
+  return gulp.src(conf.paths.dist, {read: false})
+      .pipe($.clean());
 });
 
 gulp.task('manifest', function () {
