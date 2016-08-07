@@ -22,7 +22,7 @@
     "url": "https://github.com/Sistemium/sistemium-gulp/issues"
   },
   "homepage": "https://github.com/Sistemium/sistemium-gulp#readme",
-  "devDependencies": {
+  "dependencies": {
     "browser-sync": "~2.9.11",
     "browser-sync-spa": "~1.0.3",
     "uglify-save-license": "~0.4.1",
