@@ -1,7 +1,8 @@
 'use strict';
 
 var path = require('path');
-var runSequence = require ('run-sequence');
+var runSequence = require('run-sequence');
+import del from 'del';
 var conf = require('./conf');
 var gulp = conf.gulp;
 
@@ -25,17 +26,20 @@ gulp.task('partials', ['markups'], function () {
 });
 
 gulp.task('html', ['inject', 'partials'], function () {
-  var partialsInjectFile = gulp.src(path.join(conf.paths.tmp, '/partials/templateCacheHtml.js'), { read: false });
+  var partialsInjectFile = gulp.src(path.join(conf.paths.tmp, '/partials/templateCacheHtml.js'), {read: false});
   var partialsInjectOptions = {
     starttag: '<!-- inject:partials -->',
     ignorePath: path.join(conf.paths.tmp, '/partials'),
     addRootSlash: false
   };
 
-  var htmlFilter = $.filter('*.html', { restore: true });
-  var jsFilter = $.filter('**/*.js', { restore: true });
-  var cssFilter = $.filter('**/*.css', { restore: true });
+  var htmlFilter = $.filter('*.html', {restore: true});
+  var jsFilter = $.filter('**/*.js', {restore: true});
+  var cssFilter = $.filter('**/*.css', {restore: true});
   var assets;
+
+    // path.join('!' + conf.paths.src, '/app/**/*.spec.js'),
+    // path.join('!' + conf.paths.src, '/app/**/*.mock.js')
 
   return gulp.src(path.join(conf.paths.tmp, '/serve/*.html'))
     .pipe($.replace('data-manifest=', 'manifest='))
@@ -43,15 +47,16 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe(assets = $.useref.assets())
     .pipe($.rev())
     .pipe(jsFilter)
+    .pipe($.babel())
     .pipe($.sourcemaps.init())
     .pipe($.ngAnnotate())
-    .pipe($.uglify({ preserveComments: $.uglifySaveLicense })).on('error', conf.errorHandler('Uglify'))
+    .pipe($.uglify({preserveComments: $.uglifySaveLicense})).on('error', conf.errorHandler('Uglify'))
     //.pipe($.sourcemaps.write('maps'))
     .pipe(jsFilter.restore)
     .pipe(cssFilter)
     //.pipe($.sourcemaps.init())
     .pipe($.replace('fonts/bootstrap/', '../fonts/'))
-    .pipe($.minifyCss({ processImport: false }))
+    .pipe($.minifyCss({processImport: false}))
     //.pipe($.sourcemaps.write('maps'))
     .pipe(cssFilter.restore)
     .pipe(assets.restore())
@@ -66,13 +71,14 @@ gulp.task('html', ['inject', 'partials'], function () {
     }))
     .pipe(htmlFilter.restore)
     .pipe(gulp.dest(path.join(conf.paths.dist, '/')))
-    .pipe($.size({ title: path.join(conf.paths.dist, '/'), showFiles: true }));
-  });
+    .pipe($.size({title: path.join(conf.paths.dist, '/'), showFiles: true}));
+});
 
 // Only applies for fonts from bower dependencies
 // Custom fonts are handled by the "other" task
 gulp.task('fonts', function () {
-  return gulp.src($.mainBowerFiles())
+  return gulp.src('./bower.json')
+    .pipe($.mainBowerFiles())
     .pipe($.filter('**/*.{eot,svg,ttf,woff,woff2}'))
     .pipe($.flatten())
     .pipe(gulp.dest(path.join(conf.paths.dist, '/fonts/')));
@@ -92,12 +98,12 @@ gulp.task('other', function () {
 });
 
 gulp.task('clean', function () {
-  return $.del([path.join(conf.paths.dist, '/'), path.join(conf.paths.tmp, '/')]);
+  return del([path.join(conf.paths.dist, '/'), path.join(conf.paths.tmp, '/')]);
 });
 
-gulp.task('manifest', function(){
+gulp.task('manifest', function () {
 
-  gulp.src([path.join(conf.paths.dist, '/**/*')], { base: './dist/' })
+  gulp.src([path.join(conf.paths.dist, '/**/*')], {base: './dist/'})
     .pipe($.manifest({
       hash: true,
       preferOnline: false,
@@ -109,10 +115,16 @@ gulp.task('manifest', function(){
 
 });
 
+// gulp.task('build', ['clean', 'html', 'fonts', 'other', 'manifest'], function (a) {
+//   return a;
+// });
+
 gulp.task('build', function(callback) {
-  runSequence(
+  runSequence.use(gulp)(
     'clean',
-    ['html','fonts','other'],
+    ['html',
+      'fonts',
+      'other'],
     'manifest',
     callback
   );
