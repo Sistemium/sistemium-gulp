@@ -54,7 +54,6 @@
     "watch": "^0.19.1",
     "phantomjs": "~1.9.18",
     "run-sequence": "^1.1.5",
-    "babel": "^6.5.2",
     "babel-core": "^6.4.10",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-transform-class-properties": "^6.10.2",
