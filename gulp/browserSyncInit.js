@@ -42,6 +42,7 @@ function browserSyncInit(baseDir, browser) {
         browser: browser,
         ui: false,
         port: 3000,
+        logFileChanges: false,
         ghostMode: false // set true to sync user actions across browsers
     });
 }
