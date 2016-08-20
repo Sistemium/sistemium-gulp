@@ -2,8 +2,8 @@ var storedDefaults = {
   base: ''
 };
 
-export default storedDefaults;
-export {setDefaults};
+exports.default = storedDefaults;
+exports.setDefaults = setDefaults;
 
 function setDefaults(defaults, gulp) {
   Object.assign(storedDefaults, defaults || {});
