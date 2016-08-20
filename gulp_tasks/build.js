@@ -11,6 +11,7 @@ const uglifySaveLicense = require('uglify-save-license');
 const inject = require('gulp-inject');
 const ngAnnotate = require('gulp-ng-annotate');
 const babel = require('gulp-babel');
+const manifest = require('gulp-manifest');
 
 const conf = require('../conf/gulp.conf');
 
@@ -51,3 +52,17 @@ function finishBuild() {
     .pipe(htmlFilter.restore)
     .pipe(gulp.dest(conf.path.dist()));
 }
+
+gulp.task('manifest', () =>
+
+  gulp.src(conf.path.dist('/**/*'))
+    .pipe(manifest({
+      hash: true,
+      preferOnline: false,
+      network: ['*'],
+      filename: 'app.manifest',
+      exclude: ['app.manifest', 'images/*']
+    }))
+    .pipe(gulp.dest(conf.path.dist()))
+
+);

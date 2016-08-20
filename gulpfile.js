@@ -19,7 +19,7 @@ exports.run = function (gulp, config) {
   gulp.registry(hub);
 
   gulp.task('inject:all', gulp.series(gulp.parallel('pug', 'styles', 'scripts'), 'inject'));
-  gulp.task('build', gulp.series('clean', 'pug', 'styles', 'scripts', 'partials', 'inject', 'other', 'build:finish'));
+  gulp.task('build', gulp.series('clean', 'pug', 'styles', 'scripts', 'partials', 'inject', 'other', 'build:finish', 'manifest'));
   gulp.task('test', gulp.series('scripts', 'karma:single-run'));
   gulp.task('test:auto', gulp.series('watch', 'karma:auto-run'));
   gulp.task('serve', gulp.series('inject:all', 'watch', 'browsersync'));
