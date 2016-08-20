@@ -12,6 +12,7 @@ const inject = require('gulp-inject');
 const ngAnnotate = require('gulp-ng-annotate');
 const babel = require('gulp-babel');
 const manifest = require('gulp-manifest');
+const del = require('del');
 
 const conf = require('../conf/gulp.conf');
 
@@ -65,4 +66,8 @@ gulp.task('manifest', () =>
     }))
     .pipe(gulp.dest(conf.path.dist()))
 
+);
+
+gulp.task('build:cleanup', ()=>
+  del(`${conf.paths.tmp}/templateCacheHtml.js`)
 );
