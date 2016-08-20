@@ -33,17 +33,23 @@ exports.run = function (gulp, config) {
   }
 
   function watch(done) {
+
     gulp.watch([
       conf.path.src('index.html'),
       'bower.json'
     ], gulp.parallel('inject'));
 
     gulp.watch(conf.path.src('app/**/*.html'), reloadBrowserSync);
+
+    gulp.watch(conf.path.src('app/**/*.jade'), gulp.series('pug', reloadBrowserSync));
+
     gulp.watch([
       conf.path.src('**/*.scss'),
       conf.path.src('**/*.css')
     ], gulp.series('styles'));
+
     gulp.watch(conf.path.src('**/*.js'), gulp.series('inject'));
+
     done();
   }
 
