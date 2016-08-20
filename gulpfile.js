@@ -56,10 +56,4 @@ exports.run = function (gulp, config) {
     done();
   }
 
-  // fs.readdirSync(config.base + '/gulp').filter(function(file) {
-  //   return (/\.(js|coffee)$/i).test(file);
-  // }).map(function(file) {
-  //   require('./gulp/' + file);
-  // });
-
 };
