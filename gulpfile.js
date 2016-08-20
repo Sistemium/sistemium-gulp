@@ -41,7 +41,10 @@ exports.run = function (gulp, config) {
 
     gulp.watch(conf.path.src('app/**/*.html'), reloadBrowserSync);
 
-    gulp.watch(conf.path.src('app/**/*.jade'), gulp.series('pug', reloadBrowserSync));
+    gulp.watch([
+      conf.path.src('app/**/*.jade'),
+      conf.path.src('app/**/*.pug')
+    ], gulp.series('pug', reloadBrowserSync));
 
     gulp.watch([
       conf.path.src('**/*.scss'),

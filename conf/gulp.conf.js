@@ -25,7 +25,10 @@ exports.paths = {
   tasks: 'gulp_tasks'
 };
 
-exports.paths.views = `${exports.paths.src}/app/**/*.jade`;
+exports.paths.views = [
+  `${exports.paths.src}/app/**/*.jade`,
+  `${exports.paths.src}/app/**/*.pug`
+];
 
 exports.gulp = defaults.gulp;
 
