@@ -56,7 +56,7 @@ exports.run = function (gulp, config) {
       conf.path.src('**/*.css')
     ], gulp.series('styles'));
 
-    gulp.watch(conf.path.src('**/*.js'), gulp.series('inject'));
+    gulp.watch(conf.path.src('**/*.js'), gulp.series(['scripts','inject'], reloadBrowserSync));
 
     done();
   }

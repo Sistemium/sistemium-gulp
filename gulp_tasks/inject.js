@@ -23,6 +23,5 @@ function inject() {
   return gulp.src(conf.path.src('index.html'))
     .pipe(gulpInject(injectScripts, injectOptions))
     .pipe(wiredep(Object.assign({}, conf.wiredep)))
-    .pipe(gulp.dest(conf.paths.tmp))
-    .pipe(browserSync.stream());
+    .pipe(gulp.dest(conf.paths.tmp));
 }
