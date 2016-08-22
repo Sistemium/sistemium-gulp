@@ -19,7 +19,7 @@ exports.run = function (gulp, config) {
   gulp.registry(hub);
 
   let buildTasks = [
-    'clean', 'pug', 'styles', 'scripts', 'partials', 'inject', 'other',
+    'clean', 'pug', 'styles', 'scripts', 'partials', 'inject', 'other', 'fonts',
     'build:finish', 'manifest', 'build:cleanup'
   ];
 

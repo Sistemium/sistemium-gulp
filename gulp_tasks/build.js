@@ -10,7 +10,7 @@ const sourcemaps = require('gulp-sourcemaps');
 const uglifySaveLicense = require('uglify-save-license');
 const inject = require('gulp-inject');
 const ngAnnotate = require('gulp-ng-annotate');
-const babel = require('gulp-babel');
+const replace = require('gulp-replace');
 const manifest = require('gulp-manifest');
 const del = require('del');
 
@@ -34,7 +34,6 @@ function finishBuild() {
     .pipe(inject(partialsInjectFile, partialsInjectOptions))
     .pipe(useref())
     .pipe(jsFilter)
-    // .pipe(babel({compact: true}))
     // .pipe(sourcemaps.init())
     .pipe(ngAnnotate())
     .pipe(uglify({preserveComments: uglifySaveLicense})).on('error', conf.errorHandler('Uglify'))
@@ -42,6 +41,7 @@ function finishBuild() {
     // .pipe(sourcemaps.write('maps'))
     .pipe(jsFilter.restore)
     .pipe(cssFilter)
+    .pipe(replace('fonts/bootstrap/', '../fonts/'))
     // .pipe(sourcemaps.init())
     .pipe(cssnano())
     .pipe(rev())
