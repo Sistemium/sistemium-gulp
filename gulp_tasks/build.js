@@ -16,6 +16,16 @@ const del = require('del');
 
 const conf = require('../conf/gulp.conf');
 
+const through = require('through2');
+const utimes  = require('fs').utimes;
+
+var touch = through.obj(function(file, enc, done) {
+  var now = new Date;
+  utimes(file.path, now, now, done);
+});
+
+
+
 gulp.task('build:finish', finishBuild);
 
 function finishBuild() {
@@ -52,7 +62,8 @@ function finishBuild() {
     .pipe(htmlFilter)
     .pipe(htmlmin())
     .pipe(htmlFilter.restore)
-    .pipe(gulp.dest(conf.path.dist()));
+    .pipe(gulp.dest(conf.path.dist()))
+    .pipe(touch);
 }
 
 gulp.task('manifest', () =>
