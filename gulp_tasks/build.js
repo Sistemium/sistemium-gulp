@@ -31,6 +31,7 @@ function finishBuild() {
   const cssFilter = filter(conf.path.tmp('**/*.css'), {restore: true});
 
   return gulp.src(conf.path.tmp('/index.html'))
+    .pipe(replace('data-manifest=', 'manifest='))
     .pipe(inject(partialsInjectFile, partialsInjectOptions))
     .pipe(useref())
     .pipe(jsFilter)
