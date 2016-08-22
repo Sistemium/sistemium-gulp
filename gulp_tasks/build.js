@@ -34,7 +34,7 @@ function finishBuild() {
     .pipe(inject(partialsInjectFile, partialsInjectOptions))
     .pipe(useref())
     .pipe(jsFilter)
-    .pipe(babel({compact: true}))
+    // .pipe(babel({compact: true}))
     // .pipe(sourcemaps.init())
     .pipe(ngAnnotate())
     .pipe(uglify({preserveComments: uglifySaveLicense})).on('error', conf.errorHandler('Uglify'))
