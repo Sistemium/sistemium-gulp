@@ -1,5 +1,4 @@
 const gulp = require('gulp');
-const browserSync = require('browser-sync');
 const wiredep = require('wiredep').stream;
 const angularFilesort = require('gulp-angular-filesort');
 const gulpInject = require('gulp-inject');
