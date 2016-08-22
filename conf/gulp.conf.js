@@ -13,6 +13,7 @@ const gutil = require('gulp-util');
 const defaults = require ('../defaults').default;
 
 exports.ngModule = 'webPage';
+exports.defaults = defaults;
 
 /**
  *  The main paths of your project handle these with care
