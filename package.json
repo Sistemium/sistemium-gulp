@@ -2,9 +2,11 @@
   "name": "sistemium-gulp",
   "version": "0.1.8",
   "description": "Sistemium gulp helper library",
-  "main": "gulpfile.js",
+  "main": "lib/index.js",
   "scripts": {
+    "compile": "babel src --out-dir lib",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
+    "prepublish": "npm run compile",
     "test": "babel-node ./node_modules/.bin/isparta cover _mocha",
     "watch:compile": "watch 'npm run compile' src"
   },
@@ -93,5 +95,9 @@
     "extends": [
       "xo-space/esnext"
     ]
+  },
+  "devDependencies": {
+    "babel-cli": "^6.11.4",
+    "watch": "^0.19.2"
   }
 }
