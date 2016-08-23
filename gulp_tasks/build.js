@@ -63,6 +63,7 @@ function finishBuild() {
     .pipe(htmlmin())
     .pipe(htmlFilter.restore)
     .pipe(gulp.dest(conf.path.dist()))
+    .pipe(filter(conf.path.dist('index.html')))
     .pipe(touch);
 }
 
