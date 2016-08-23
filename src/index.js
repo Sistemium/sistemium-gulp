@@ -1,17 +1,20 @@
 'use strict';
 
-import {setDefaults} from './defaults';
+import {setDefaults, defaults} from './defaults';
 const HubRegistry = require('gulp-hub');
 const browserSync = require('browser-sync');
+
+exports.config = function (config) {
+  setDefaults(config);
+  return exports;
+}
 
 
 exports.run = function (gulp, config) {
 
-  config = setDefaults(config, gulp);
-  config.base = config.base || '.';
-  const conf = require('./conf/gulp.conf');
+  config = config ? setDefaults(config, gulp) : defaults;
 
-  // Load some files into the registry
+  const conf = require('./conf/gulp.conf');
   const hub = new HubRegistry([conf.path.tasks('*.js')]);
 
   // Tell gulp to use the tasks just loaded
@@ -28,7 +31,7 @@ exports.run = function (gulp, config) {
   gulp.task('test:auto', gulp.series('watch', 'karma:auto-run'));
   gulp.task('serve', gulp.series('inject:all', 'watch', 'browsersync'));
   gulp.task('serve:dist', gulp.series('default', 'browsersync:dist'));
-  gulp.task('default', gulp.series('clean', 'build'));
+  gulp.task('default', gulp.series('serve'));
   gulp.task('watch', watch);
 
   function reloadBrowserSync(cb) {

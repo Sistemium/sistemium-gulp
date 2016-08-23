@@ -10,7 +10,7 @@
 
 const path = require('path');
 const gutil = require('gulp-util');
-const defaults = require ('../defaults').default;
+const defaults = require ('../defaults').defaults;
 
 exports.ngModule = defaults.ngModule || 'webPage';
 exports.defaults = defaults;
