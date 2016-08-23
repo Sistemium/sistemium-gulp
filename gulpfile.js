@@ -1,7 +1,6 @@
 'use strict';
 
 import {setDefaults} from './defaults';
-const gulp = require('gulp');
 const HubRegistry = require('gulp-hub');
 const browserSync = require('browser-sync');
 
