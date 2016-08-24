@@ -17,7 +17,7 @@ Install it via npm:
 npm install sistemium-gulp --save-dev
 ```
 
-### Add gulpfile.js to your project:
+Add gulpfile.js to your project:
 
 ```javascript
 require('sistemium-gulp')
@@ -27,7 +27,7 @@ require('sistemium-gulp')
   .run(require('gulp'));
 ```
 
-### Add .babelrc to your project:
+Add .babelrc to your project:
 
 ```
 {
