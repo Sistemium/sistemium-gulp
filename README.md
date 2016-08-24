@@ -35,6 +35,21 @@ Add .babelrc to your project:
 }
 ```
 
+Add .eslintrc to yor project:
+
+```
+{
+  "extends": "eslint:recommended",
+  "plugins": ["angular"],
+  "globals": {
+    "angular": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6
+  }
+}
+```
+
 ## License
 
 ISC
