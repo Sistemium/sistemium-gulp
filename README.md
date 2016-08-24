@@ -17,7 +17,7 @@ Install it via npm:
 npm install sistemium-gulp --save-dev
 ```
 
-And gulpfile.js to your project:
+### Add gulpfile.js to your project:
 
 ```javascript
 require('sistemium-gulp')
@@ -25,6 +25,14 @@ require('sistemium-gulp')
     ngModule: 'yourProjectMainModule'
   })
   .run(require('gulp'));
+```
+
+### Add .babelrc to your project:
+
+```
+{
+  "presets": ["es2015"]
+}
 ```
 
 ## License
