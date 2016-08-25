@@ -13,22 +13,15 @@ const ngAnnotate = require('gulp-ng-annotate');
 const replace = require('gulp-replace');
 const manifest = require('gulp-manifest');
 const del = require('del');
-
-const conf = require('../conf/gulp.conf');
-
 const through = require('through2');
 const utimes  = require('fs').utimes;
 
-var touch = through.obj(function(file, enc, done) {
-  var now = new Date;
-  utimes(file.path, now, now, done);
-});
-
-
+const conf = require('../conf/gulp.conf');
 
 gulp.task('build:finish', finishBuild);
 
 function finishBuild() {
+
   const partialsInjectFile = gulp.src(conf.path.tmp('templateCacheHtml.js'), {read: false});
   const partialsInjectOptions = {
     starttag: '<!-- inject:partials -->',
@@ -39,6 +32,11 @@ function finishBuild() {
   const htmlFilter = filter(conf.path.tmp('*.html'), {restore: true});
   const jsFilter = filter(conf.path.tmp('**/*.js'), {restore: true});
   const cssFilter = filter(conf.path.tmp('**/*.css'), {restore: true});
+
+  var touch = through.obj(function(file, enc, done) {
+    var now = new Date;
+    utimes(file.path, now, now, done);
+  });
 
   return gulp.src(conf.path.tmp('/index.html'))
     .pipe(replace('data-manifest=', 'manifest='))

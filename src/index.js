@@ -1,18 +1,20 @@
 'use strict';
 
-import {setDefaults, defaults} from './defaults';
+import {setDefaults} from './defaults';
 const HubRegistry = require('gulp-hub');
 const browserSync = require('browser-sync');
 
 exports.config = function (config) {
   setDefaults(config);
   return exports;
-}
+};
 
 
 exports.run = function (gulp, config) {
 
-  config = config ? setDefaults(config, gulp) : defaults;
+  if (config) {
+    setDefaults(config);
+  }
 
   const conf = require('./conf/gulp.conf');
   const hub = new HubRegistry([conf.path.tasks('*.js')]);
