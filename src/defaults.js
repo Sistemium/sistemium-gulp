@@ -1,4 +1,7 @@
 var storedDefaults = {
+  browserSync: {
+
+  }
 };
 
 exports.setDefaults = setDefaults;

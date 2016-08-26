@@ -2,7 +2,7 @@ const conf = require('./gulp.conf');
 const _ = require('lodash');
 
 module.exports = function () {
-  return {
+  return _.defaultsDeep(conf.defaults.browserSync, {
     server: {
       baseDir: [
         conf.paths.tmp,
@@ -15,9 +15,9 @@ module.exports = function () {
     open: false,
     reloadOnRestart: true,
     notify: false,
-    port: _.get(conf.defaults,'browserSync.port') || 3000,
+    port: 3000,
     ui: {
-      port: _.get(conf.defaults,'browserSync.ui.port') || 3001
+      port: 3001
     }
-  };
+  });
 };
