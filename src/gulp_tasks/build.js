@@ -45,6 +45,8 @@ function finishBuild() {
     .pipe(jsFilter)
     // .pipe(sourcemaps.init())
     .pipe(ngAnnotate())
+    // TODO: make configurable replace
+    .pipe(replace('\'//api-maps.yandex.ru', '\'http://api-maps.yandex.ru'))
     .pipe(uglify({preserveComments: uglifySaveLicense})).on('error', conf.errorHandler('Uglify'))
     .pipe(rev())
     // .pipe(sourcemaps.write('maps'))
