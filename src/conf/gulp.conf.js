@@ -8,6 +8,7 @@
  *  of the tasks
  */
 
+import _ from 'lodash';
 const path = require('path');
 const gutil = require('gulp-util');
 const defaults = require ('../defaults').defaults;
@@ -23,7 +24,7 @@ exports.paths = {
   dist: defaults.dist || 'dist',
   tmp: defaults.tmp || '.tmp',
   e2e: defaults.e2e || 'e2e',
-  tasks: 'gulp_tasks'
+  tasks: defaults.tasks || 'gulp_tasks'
 };
 
 exports.paths.views = [
@@ -32,6 +33,7 @@ exports.paths.views = [
 ];
 
 exports.gulp = defaults.gulp;
+_.defaults (exports, defaults);
 
 exports.path = {};
 for (const pathName in exports.paths) {

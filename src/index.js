@@ -9,6 +9,20 @@ exports.config = function (config) {
   return exports;
 };
 
+exports.lib = (gulp) => {
+
+  // setDefaults({
+  //   tasks: 'lib_tasks'
+  // });
+
+  const conf = require('./conf/gulp.conf');
+
+  gulp.registry(new HubRegistry([conf.path.tasks('*.js')]));
+
+  gulp.task('default', gulp.series('build:finish'));
+
+};
+
 
 exports.run = function (gulp, config) {
 
