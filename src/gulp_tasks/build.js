@@ -76,7 +76,7 @@ gulp.task('manifest', () =>
       preferOnline: false,
       network: ['*'],
       filename: 'app.manifest',
-      exclude: ['app.manifest', 'images/*']
+      exclude: ['app.manifest']
     }))
     .pipe(gulp.dest(conf.path.dist()))
 
