@@ -61,6 +61,7 @@ function finishBuild() {
     .pipe(revReplace())
     .pipe(htmlFilter)
     .pipe(htmlmin())
+    .pipe(replace('<script src=', '<script charset="utf-8" src='))
     .pipe(htmlFilter.restore)
     .pipe(gulp.dest(conf.path.dist()))
     .pipe(filter(conf.path.dist('index.html')))
