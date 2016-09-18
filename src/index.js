@@ -11,15 +11,16 @@ exports.config = function (config) {
 
 exports.lib = (gulp) => {
 
-  // setDefaults({
-  //   tasks: 'lib_tasks'
-  // });
-
   const conf = require('./conf/gulp.conf');
 
   gulp.registry(new HubRegistry([conf.path.tasks('*.js')]));
 
-  gulp.task('default', gulp.series('build:finish'));
+  gulp.task('default', gulp.series('build:finish', watch));
+
+  function watch(done) {
+    gulp.watch(conf.path.src('**/*.js'), gulp.series('build:finish'));
+    done();
+  }
 
 };
 
