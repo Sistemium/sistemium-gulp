@@ -14,7 +14,9 @@ const replace = require('gulp-replace');
 const manifest = require('gulp-manifest');
 const del = require('del');
 const through = require('through2');
-const utimes  = require('fs').utimes;
+const utimes = require('fs').utimes;
+const pipe = require('gulp-pipe');
+const _ = require('lodash');
 
 const conf = require('../conf/gulp.conf');
 
@@ -33,10 +35,17 @@ function finishBuild() {
   const jsFilter = filter(conf.path.tmp('**/*.js'), {restore: true});
   const cssFilter = filter(conf.path.tmp('**/*.css'), {restore: true});
 
-  var touch = through.obj(function(file, enc, done) {
+  var touch = through.obj(function (file, enc, done) {
     var now = new Date;
     utimes(file.path, now, now, done);
   });
+
+  var cssReplace = [replace('fonts/bootstrap/', '../fonts/')];
+
+  Array.prototype.push.apply(
+    cssReplace,
+    _.map(_.get(conf, 'build.replace.css'), (val, key) => replace(key, val))
+  );
 
   return gulp.src(conf.path.tmp('/index.html'))
     .pipe(replace('data-manifest=', 'manifest='))
@@ -52,7 +61,7 @@ function finishBuild() {
     // .pipe(sourcemaps.write('maps'))
     .pipe(jsFilter.restore)
     .pipe(cssFilter)
-    .pipe(replace('fonts/bootstrap/', '../fonts/'))
+    .pipe(pipe(cssReplace))
     // .pipe(sourcemaps.init())
     .pipe(cssnano())
     .pipe(rev())
@@ -79,7 +88,6 @@ gulp.task('manifest', () =>
       exclude: ['app.manifest']
     }))
     .pipe(gulp.dest(conf.path.dist()))
-
 );
 
 gulp.task('build:cleanup', ()=>
