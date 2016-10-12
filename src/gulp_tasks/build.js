@@ -17,6 +17,7 @@ const through = require('through2');
 const utimes = require('fs').utimes;
 const pipe = require('gulp-pipe');
 const _ = require('lodash');
+const identity = require('gulp-uglify');
 
 const conf = require('../conf/gulp.conf');
 
@@ -47,6 +48,13 @@ function finishBuild() {
     _.map(_.get(conf, 'build.replace.css'), (val, key) => replace(key, val))
   );
 
+  var jsReplace = [identity()];
+
+  Array.prototype.push.apply(
+    jsReplace,
+    _.map(_.get(conf, 'build.replace.js'), (val, key) => replace(key, val))
+  );
+
   return gulp.src(conf.path.tmp('/index.html'))
     .pipe(replace('data-manifest=', 'manifest='))
     .pipe(inject(partialsInjectFile, partialsInjectOptions))
@@ -54,8 +62,7 @@ function finishBuild() {
     .pipe(jsFilter)
     // .pipe(sourcemaps.init())
     .pipe(ngAnnotate())
-    // TODO: make configurable replace
-    .pipe(replace('\'//api-maps.yandex.ru', '\'http://api-maps.yandex.ru'))
+    .pipe(pipe(jsReplace))
     .pipe(uglify({preserveComments: uglifySaveLicense})).on('error', conf.errorHandler('Uglify'))
     .pipe(rev())
     // .pipe(sourcemaps.write('maps'))
