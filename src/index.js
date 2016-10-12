@@ -78,7 +78,7 @@ exports.run = function (gulp, config) {
     gulp.watch([
       conf.path.src('index.html'),
       'bower.json'
-    ], gulp.parallel('inject'));
+    ], gulp.series('inject', reloadBrowserSync));
 
     gulp.watch(conf.path.src('app/**/*.html'), reloadBrowserSync);
 
