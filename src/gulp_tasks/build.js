@@ -70,7 +70,9 @@ function finishBuild() {
     .pipe(cssFilter)
     .pipe(pipe(cssReplace))
     // .pipe(sourcemaps.init())
-    .pipe(cssnano())
+    .pipe(cssnano({
+      safe: true
+    }))
     .pipe(rev())
     // .pipe(sourcemaps.write('maps'))
     .pipe(cssFilter.restore)
