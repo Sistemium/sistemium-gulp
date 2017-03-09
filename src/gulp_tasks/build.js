@@ -55,6 +55,16 @@ function finishBuild() {
     _.map(_.get(conf, 'build.replace.js'), (val, key) => replace(key, val))
   );
 
+  function preservator(name, comments) {
+    return uglifySaveLicense(name, comments);
+      // || /^.*Click$/.test(name);
+  }
+
+  var uglifyOptions = _.assign(
+    {preserveComments: preservator},
+    _.get(conf, 'build.uglify') || {}
+  );
+
   return gulp.src(conf.path.tmp('/index.html'))
     .pipe(replace('data-manifest=', 'manifest='))
     .pipe(inject(partialsInjectFile, partialsInjectOptions))
@@ -63,7 +73,7 @@ function finishBuild() {
     // .pipe(sourcemaps.init())
     .pipe(ngAnnotate())
     .pipe(pipe(jsReplace))
-    .pipe(uglify({preserveComments: uglifySaveLicense})).on('error', conf.errorHandler('Uglify'))
+    .pipe(uglify(uglifyOptions)).on('error', conf.errorHandler('Uglify'))
     .pipe(rev())
     // .pipe(sourcemaps.write('maps'))
     .pipe(jsFilter.restore)
