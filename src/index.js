@@ -39,10 +39,11 @@ exports.run = function (gulp, config) {
 
   let buildTasks = [
     'clean', 'pug', 'styles', 'scripts', 'partials', 'inject', 'other', 'fonts',
+    'json',
     'build:finish', 'manifest', 'build:cleanup'
   ];
 
-  gulp.task('inject:all', gulp.series(gulp.parallel('pug', 'styles', 'scripts'), 'inject'));
+  gulp.task('inject:all', gulp.series(gulp.parallel('pug', 'styles', 'scripts', 'json'), 'inject'));
   gulp.task('build', gulp.series(buildTasks));
   gulp.task('test', gulp.series('scripts', 'karma:single-run'));
   gulp.task('test:auto', gulp.series('watch', 'karma:auto-run'));
