@@ -42,7 +42,7 @@
     "eslint-config-xo-space": "^0.12.0",
     "eslint-plugin-angular": "^1.3.0",
     "eslint-plugin-babel": "^3.1.0",
-    "gulp": "gulpjs/gulp#d8f5c90a0622d19ef1943a2a3d02dc50e3c853e7",
+    "gulp": "gulpjs/gulp#3f5aba28718dc19e4bf600fb88f128158ff2ff83",
     "gulp-angular-filesort": "^1.1.1",
     "gulp-angular-templatecache": "^1.8.0",
     "gulp-babel": "^6.1.0",
