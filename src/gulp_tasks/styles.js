@@ -5,6 +5,7 @@ const sass = require('gulp-sass');
 const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const gulpInject = require('gulp-inject');
+const importOnce = require('node-sass-import-once');
 
 const conf = require('../conf/gulp.conf');
 
@@ -13,7 +14,14 @@ gulp.task('styles', styles);
 function styles() {
 
   var sassOptions = {
-    outputStyle: 'expanded'
+    outputStyle: 'expanded',
+    importer: importOnce
+    // ,
+    // importOnce: {
+    //   index: false,
+    //   css: false,
+    //   bower: false
+    // }
   };
 
   var injectFiles = gulp.src([
