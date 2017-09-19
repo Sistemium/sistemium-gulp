@@ -21,6 +21,8 @@ const identity = require('gulp-uglify');
 
 const conf = require('../conf/gulp.conf');
 
+const webkitAssign = require('webkit-assign/gulp');
+
 gulp.task('build:finish', finishBuild);
 
 function finishBuild() {
@@ -70,6 +72,7 @@ function finishBuild() {
     .pipe(inject(partialsInjectFile, partialsInjectOptions))
     .pipe(useref())
     .pipe(jsFilter)
+    .pipe(webkitAssign())
     // .pipe(sourcemaps.init())
     .pipe(ngAnnotate())
     .pipe(pipe(jsReplace))
@@ -81,7 +84,7 @@ function finishBuild() {
     .pipe(pipe(cssReplace))
     // .pipe(sourcemaps.init())
     .pipe(cssnano({
-      safe: true
+      zindex: false
     }))
     .pipe(rev())
     // .pipe(sourcemaps.write('maps'))
