@@ -14,6 +14,7 @@ gulp.task('styles', styles);
 function styles() {
 
   var sassOptions = {
+    includePaths: ['src/app/styles'],
     outputStyle: 'expanded',
     importer: importOnce
     // ,
@@ -30,7 +31,7 @@ function styles() {
 
   var injectOptions = {
     transform: function(filePath) {
-      // filePath = filePath.replace(conf.paths.src + '/app/', '');
+      // filePath = filePath.replace(/^\/app\//, '/');
       return `@import "${filePath}";`;
     },
     starttag: '// injector',

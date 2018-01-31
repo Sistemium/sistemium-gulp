@@ -44,13 +44,22 @@ exports.run = function (gulp, config) {
   ];
 
   gulp.task('inject:all', gulp.series(gulp.parallel('pug', 'styles', 'scripts', 'json'), 'inject'));
-  gulp.task('build', gulp.series(buildTasks));
   gulp.task('test', gulp.series('scripts', 'karma:single-run'));
   gulp.task('test:auto', gulp.series('watch', 'karma:auto-run'));
   gulp.task('serve', gulp.series('inject:all', 'watch', 'browsersync'));
   gulp.task('serve:dist', gulp.series('build', 'browsersync:dist', watchDist));
   gulp.task('default', gulp.series('serve'));
   gulp.task('watch', watch);
+
+  function build(options) {
+    return gulp.series(buildTasks)(options);
+  }
+
+  build.flags = {
+    '--sales': 'Builds only sales module'
+  };
+
+  gulp.task('build', build);
 
   function reloadBrowserSync(cb) {
     browserSync.reload();

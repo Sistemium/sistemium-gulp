@@ -85,7 +85,8 @@
     "through2": "^2.0.1",
     "uglify-save-license": "^0.4.1",
     "webkit-assign": "^1.4.1",
-    "wiredep": "^4.0.0"
+    "wiredep": "^4.0.0",
+    "yargs": "^10.0.3"
   },
   "eslintConfig": {
     "globals": {
