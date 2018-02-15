@@ -10,12 +10,13 @@ gulp.task('build:finish', finishBuild);
 
 function finishBuild() {
 
-  return gulp.src(conf.path.src('**/*.js'))
+  return gulp.src([conf.path.src('**/*.js'), conf.path.tmp('templateCacheHtml.js')])
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(babel())
     .pipe(angularFilesort()).on('error', conf.errorHandler('AngularFilesort'))
     .pipe(ngAnnotate())
+    // .pipe(inject(partialsInjectFile, partialsInjectOptions))
     .pipe(concat(conf.concat || 'index.js', {process: function(src) {
       return (src.trim() + '\n').replace(/(^|\n)[ \t]*('use strict'|"use strict");?\s*/g, '$1');
     }}))

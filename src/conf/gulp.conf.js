@@ -15,6 +15,7 @@ const defaults = require ('../defaults').defaults;
 
 exports.ngModule = defaults.ngModule || 'webPage';
 exports.defaults = defaults;
+exports.styles = defaults.styles;
 
 /**
  *  The main paths of your project handle these with care
@@ -30,6 +31,11 @@ exports.paths = {
 exports.paths.views = [
   `${exports.paths.src}/app/**/*.jade`,
   `${exports.paths.src}/app/**/*.pug`
+];
+
+exports.paths.libViews = [
+  `${exports.paths.src}/**/*.jade`,
+  `${exports.paths.src}/**/*.pug`
 ];
 
 exports.gulp = defaults.gulp;
