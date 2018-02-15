@@ -1,6 +1,7 @@
 'use strict';
 
 import {setDefaults} from './defaults';
+
 const HubRegistry = require('gulp-hub');
 const browserSync = require('browser-sync');
 
@@ -13,14 +14,34 @@ exports.lib = (gulp) => {
 
   const conf = require('./conf/gulp.conf');
 
-  gulp.registry(new HubRegistry([conf.path.tasks('*.js')]));
+  const hub = new HubRegistry([
+    conf.path.tasks('*.js'),
+    conf.path.tasks('../gulp_tasks/misc.js')
+  ]);
 
-  gulp.task('default', gulp.series('build:finish', watch));
+  gulp.registry(hub);
 
-  function watch(done) {
-    gulp.watch(conf.path.src('**/*.js'), gulp.series('build:finish'));
-    done();
+  let buildTasks = [
+    'clean',
+    'styles',
+    'others',
+    'pug',
+    // 'styles',
+    // 'scripts',
+    'partials',
+    'build:finish'
+  ];
+
+  function build(options) {
+    return gulp.series(buildTasks)(options);
   }
+
+  gulp.task('default', build);
+
+  // function watch(done) {
+  //   gulp.watch(conf.path.src('**/*.js'), build);
+  //   done();
+  // }
 
 };
 
