@@ -1,8 +1,10 @@
-var storedDefaults = {
+const storedDefaults = {
   browserSync: {
 
   },
-  styles: {}
+  styles: {
+    includePaths: ['src/app/styles']
+  }
 };
 
 exports.setDefaults = setDefaults;

@@ -118,6 +118,8 @@ exports.run = function (gulp, config) {
       conf.path.src('app/**/*.pug')
     ], gulp.series('pug', reloadBrowserSync));
 
+    gulp.watch(conf.path.src('app/**/*.json'), gulp.series('json', reloadBrowserSync));
+
     gulp.watch([
       conf.path.src('**/*.scss'),
       conf.path.src('**/*.css')
