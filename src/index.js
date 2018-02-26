@@ -33,15 +33,15 @@ exports.lib = (gulp) => {
   ];
 
   function build(options) {
-    return gulp.series(buildTasks)(options);
+    return gulp.series(buildTasks, watch)(options);
   }
 
   gulp.task('default', build);
 
-  // function watch(done) {
-  //   gulp.watch(conf.path.src('**/*.js'), build);
-  //   done();
-  // }
+  function watch(done) {
+    gulp.watch(conf.path.src('**/*.{js,pug,jade,scss}'), build);
+    done();
+  }
 
 };
 
