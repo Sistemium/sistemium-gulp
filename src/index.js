@@ -53,14 +53,18 @@ exports.run = function (gulp, config) {
   }
 
   const conf = require('./conf/gulp.conf');
-  const hub = new HubRegistry([conf.path.tasks('*.js')]);
+
+  const hub = new HubRegistry([
+    conf.path.tasks('*.js'),
+    conf.path.tasks('../lib_tasks/others.js')
+  ]);
 
   // Tell gulp to use the tasks just loaded
   gulp.registry(hub);
 
   let buildTasks = [
     'clean', 'pug', 'styles', 'scripts', 'partials', 'inject', 'other', 'fonts',
-    'json',
+    'json', 'others',
     'build:finish', 'manifest', 'build:cleanup'
   ];
 

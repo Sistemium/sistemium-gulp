@@ -1,6 +1,6 @@
 {
   "name": "sistemium-gulp",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Sistemium gulp helper library",
   "main": "lib/index.js",
   "scripts": {

@@ -11,8 +11,12 @@ let {others} = conf;
 
 let tasks = _.map(others, (paths, key) => {
 
-  let {from = paths[0], to = paths[1], replaces} = paths;
+  let {from = paths[0], to = paths[1], replaces, flatten = true} = paths;
   let task = `other_${key}`;
+
+  if (paths.length > 2) {
+    flatten = paths[2];
+  }
 
   console.log('Replace: ', key, from, to, replaces);
 
@@ -26,9 +30,13 @@ let tasks = _.map(others, (paths, key) => {
       res = res.pipe(pipe(replaceOther));
     }
 
-    return res.pipe(rename({
-      dirname:''
-    }))
+    let renameConf = {};
+
+    if (flatten) {
+      renameConf.dirname = '';
+    }
+
+    return res.pipe(rename(renameConf))
       .pipe(gulp.dest(path.join(conf.paths.dist, to)));
 
   });
