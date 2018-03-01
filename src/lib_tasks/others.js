@@ -47,4 +47,4 @@ let tasks = _.map(others, (paths, key) => {
 
 console.log(tasks);
 
-gulp.task('others', tasks.length ? gulp.series(tasks) : _.result);
+gulp.task('others', tasks.length ? gulp.series(tasks) : done => done());
