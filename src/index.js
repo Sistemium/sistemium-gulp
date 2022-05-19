@@ -69,8 +69,8 @@ exports.run = function (gulp, config) {
   ];
 
   gulp.task('inject:all', gulp.series(gulp.parallel('pug', 'styles', 'scripts', 'json'), 'inject'));
-  gulp.task('test', gulp.series('scripts', 'karma:single-run'));
-  gulp.task('test:auto', gulp.series('watch', 'karma:auto-run'));
+  // gulp.task('test', gulp.series('scripts', 'karma:single-run'));
+  // gulp.task('test:auto', gulp.series('watch', 'karma:auto-run'));
   gulp.task('serve', gulp.series('inject:all', 'watch', 'browsersync'));
   gulp.task('serve:dist', gulp.series('build', 'browsersync:dist', watchDist));
   gulp.task('default', gulp.series('serve'));

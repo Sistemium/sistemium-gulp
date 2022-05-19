@@ -5,9 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "compile": "babel src --out-dir lib",
-    "coveralls": "cat ./coverage/lcov.info | coveralls",
     "prepublish": "npm run compile",
-    "test": "babel-node ./node_modules/.bin/isparta cover _mocha",
     "watch:compile": "watch 'npm run compile' src"
   },
   "repository": {
@@ -72,15 +70,6 @@
     "gulp-uglify": "^1.4.2",
     "gulp-useref": "^3.1.6",
     "gulp-util": "^3.0.7",
-    "jasmine": "^2.4.1",
-    "karma": "^0.13.14",
-    "karma-angular-filesort": "^1.0.2",
-    "karma-coverage": "^0.5.3",
-    "karma-jasmine": "^0.3.8",
-    "karma-junit-reporter": "^0.4.2",
-    "karma-ng-html2js-preprocessor": "^0.2.0",
-    "karma-phantomjs-launcher": "^1.0.4",
-    "karma-phantomjs-shim": "^1.1.2",
     "main-bower-files": "^2.9.0",
     "node-sass-import-once": "^1.2.0",
     "phantomjs-prebuilt": "^2.1.16",
